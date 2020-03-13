@@ -1,0 +1,7 @@
+#!/bin/sh
+
+vm=$1
+l=`VBoxManage list runningvms | grep "$vm"`
+if [ ! -z "$l" ]; then
+  VBoxManage -q controlvm "$vm" savestate
+fi
