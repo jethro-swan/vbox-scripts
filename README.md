@@ -38,14 +38,14 @@ e.g.
 restartvm crun15
 ```
 
-# List running VM
+#### List running VM
 
 e.g.
 ```
 listvm
 ```
 
-# Show information about VM
+#### Show information about VM
 
 e.g.
 ```
