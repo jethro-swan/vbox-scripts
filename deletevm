@@ -1,0 +1,10 @@
+#!/bin/sh
+
+vm=$1
+# If the VM is running, stope it:
+l=`VBoxManage list runningvms | grep "$vm"`
+if [ ! -z "$l" ]; then
+  VBoxManage -q controlvm "$vm" poweroff
+fi
+# Deregister and eradicate VM:
+VBoxManage unregistervm --delete "$vm"
