@@ -1,0 +1,11 @@
+#!/bin/sh
+
+vm=$1
+l=`VBoxManage list runningvm s| grep "$vm"`
+
+if [ ! -z "$l" ]; then
+  VBoxManage -q controlvm "$vm" poweroff
+  sleep 3
+fi
+
+VBoxManage -q startvm "$vm" --type headless
