@@ -1,0 +1,62 @@
+#!/bin/sh
+
+isosrc="/opt/installation/Ubuntu/19.10/64/ubuntu-19.10-server-amd64.iso"
+#isosrc="/opt/installation/Ubuntu/18.04/64/ubuntu-18.04.4-server-amd64.iso"
+#isosrc="/opt/installation/Ubuntu/18.04/64/ubuntu-18.04.3-live-server-amd64.iso"
+#isosrc="/opt/installation/Ubuntu/16.04/64/ubuntu-16.04.5-server-amd64.iso"
+#isosrc="/opt/installation/OpenBSD/6.4/amd64/cd64.iso"
+
+if [ ! -f "$isosrc" ]; then
+  echo "No iso"
+  exit 1
+fi
+
+machine_name="$1"
+os_type="Ubuntu_64"
+#os_type="OpenBSD_64"
+
+vm_folder="/v1"
+mkdir "$vm_folder/$1"
+eth="enp1s0f0"
+#eth="virbr0"
+#eth="eth0"
+vdipath="$vm_folder/$1/$1.vdi"
+vdisize="100000"
+# make this a different one for each vbox eg 3390 3391 etc. Access with a rdp client eg KRDC
+vrdeport=$2
+#vrdeport="3390"
+mem=$3
+#mem="4096"
+
+
+#VBoxManage dhcpserver add --netname "ns1"  --lowerip 192.168.1.140 --upperip 192.168.1.160 --enable
+
+VBoxManage createvm --basefolder "$vm_folder" --name "$machine_name" --register
+
+VBoxManage modifyvm "$machine_name" --memory "$mem" 
+VBoxManage modifyvm "$machine_name" --acpi on 
+VBoxManage modifyvm "$machine_name" --boot1 dvd 
+VBoxManage modifyvm "$machine_name" --nic1 bridged --bridgeadapter1 "$eth" --nictype1 virtio
+VBoxManage modifyvm "$machine_name" --ostype "$os_type" 
+VBoxManage modifyvm "$machine_name" --vrde on --vrdeport "$vrdeport" 
+VBoxManage modifyvm "$machine_name" --audio none
+
+#VBoxManage modifyvm "$machine_name" --nicpromisc1 allow-all
+#VBoxManage modifyvm "$machine_name" --nicpromisc1 deny|allow-vms|allow-all
+
+
+VBoxManage createhd --filename "$vdipath" --size "$vdisize" --format VDI
+
+## Establish Controller
+VBoxManage storagectl "$machine_name" --name "SATA Controller" --add sata --controller IntelAhci --bootable on
+
+## Connect the storage devices to the controller
+##
+## Hard Drive Storage
+VBoxManage storageattach "$machine_name" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium "$vdipath"
+
+## DVD Drive Storage
+VBoxManage storageattach "$machine_name" --storagectl "SATA Controller" --port 1 --device 0 --type dvddrive --medium "$isosrc"
+
+#echo "Now run startvms for $machine_name"
+VBoxHeadless --startvm "$machine_name"
