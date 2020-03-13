@@ -1,0 +1,4 @@
+#!/bin/sh
+
+vm=$1
+vboxmanage showvminfo $vm | less
