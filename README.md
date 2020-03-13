@@ -2,6 +2,8 @@
 
 Some extremely simple scripts to create and manage headless VirtualBox VM.
 
+(Adapted from scripts originally provided by Bob Hutchinson https://github.com/arwystli)
+
 #### Create a VirtualBox VM
 
 vbox_install <name of VM> <RDP port> <memory allocation>
