@@ -2,6 +2,8 @@
 
 Some extremely simple scripts to create and manage headless VirtualBox VM (adapted from scripts originally provided by Bob Hutchinson https://github.com/arwystli).
 
+In due course the intention is to combine these into a single script with a rich set of options, but for the time being they work as needed.
+
 ### Install VBoxManage and the VirtualBox Extension Pack
 
 The download page for Linux versions is at https://www.virtualbox.org/wiki/Linux_Downloads
