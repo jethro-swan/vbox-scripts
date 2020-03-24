@@ -14,7 +14,7 @@ After installing VBoxManage download the VirtualBox Extension Pack from https://
 
 #### Create a VirtualBox VM
 
-vbox_install <name of VM> <RDP port> <memory allocation>
+vbox_install &lt;name of VM&gt; &lt;RDP port&gt; &lt;memory allocation&gt;
 e.g.
 ```
 vbox_install crun15 3445 8192
