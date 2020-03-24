@@ -1,5 +1,16 @@
 #!/bin/sh
 
+# TODO: Add help (-h) and multiple options.
+# Meanwhile, you'll have to edit this script to make it work in your setup.
+
+machine_name="$1"
+# make this a different one for each vbox eg 3390 3391 etc. Access with a rdp client eg KRDC
+vrdeport=$2
+#vrdeport="3390"
+mem=$3
+#mem="4096"
+
+
 isosrc="/opt/installation/Ubuntu/19.10/64/ubuntu-19.10-server-amd64.iso"
 #isosrc="/opt/installation/Ubuntu/18.04/64/ubuntu-18.04.4-server-amd64.iso"
 #isosrc="/opt/installation/Ubuntu/18.04/64/ubuntu-18.04.3-live-server-amd64.iso"
@@ -11,7 +22,6 @@ if [ ! -f "$isosrc" ]; then
   exit 1
 fi
 
-machine_name="$1"
 os_type="Ubuntu_64"
 #os_type="OpenBSD_64"
 
@@ -22,11 +32,6 @@ eth="enp1s0f0"
 #eth="eth0"
 vdipath="$vm_folder/$1/$1.vdi"
 vdisize="100000"
-# make this a different one for each vbox eg 3390 3391 etc. Access with a rdp client eg KRDC
-vrdeport=$2
-#vrdeport="3390"
-mem=$3
-#mem="4096"
 
 
 #VBoxManage dhcpserver add --netname "ns1"  --lowerip 192.168.1.140 --upperip 192.168.1.160 --enable
