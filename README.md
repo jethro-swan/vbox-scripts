@@ -23,7 +23,7 @@ vbox_install crun15 3445 8192
   
 You will need to download appropriate .iso files and edit this script to point to the correct location.
 
-(This script will be modified in due course to allow selection of OS and version as parameters.)
+(This script will be modified in due course to allow selection of OS and version as parameters, along with built-in help (-h) and multiple options. Meanwhile, you'll have to edit this script to make it work in your setup.)
 
 #### Save the execution state of a running VM
 
