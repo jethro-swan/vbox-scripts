@@ -20,7 +20,6 @@ vbox_install &lt;name of VM&gt; &lt;RDP port&gt; &lt;memory allocation&gt;
 e.g.
 ```
 vbox_install crun15 3445 8192
-
 ```
 
 You will need to download appropriate .iso files and edit this script to point to the correct location.
